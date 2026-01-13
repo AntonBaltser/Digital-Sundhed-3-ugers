@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+part 'view_model/create_acount_viewmodel.dart';
 part 'view_model/individual_info_viewmodel.dart';
 part 'view_model/caretaker_info_viewmodel.dart';
 
 part 'view/create_acount_view.dart';
 part 'view/individual_info_view.dart';
 part 'view/caretaker_info_view.dart';
+part 'view/find_device_view.dart';
+part 'view/loading_screen_view.dart';
+part 'view/main_screen_view.dart';
 
-void main() {
+void main() async {
+  // Lås skærmens rotation
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(const MyApp());
 }
 
@@ -20,9 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: CreateAccount(),
       home: IndividualInfo(),
-      // home: CareTakerInfo(),
     );
   }
 }
