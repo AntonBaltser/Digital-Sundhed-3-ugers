@@ -1,197 +1,203 @@
 import 'package:flutter/material.dart';
 import 'package:mdsflutter/Mds.dart';
+import 'package:movesense_plus/movesense_plus.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+part 'model/DataModel/Location.dart';
+part 'model/DataModel/Movement.dart';
+part 'model/LogicModel/location_manager.dart';
+part 'model/LogicModel/movement_detector.dart';
+part 'model/LogicModel/movesense_manager.dart';
+part 'model/DataModel/person.dart';
+part 'model/LogicModel/data_manager.dart';
+part 'model/LogicModel/message_manager.dart';
 
-
-class MyApp extends StatelessWidget {
-
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ScanMovesense(),
-    );
-  }
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
 
-class MovesenseDevice {
-  final String name;
-  final String address;
+// class MyApp extends StatelessWidget {
 
-  MovesenseDevice(this.name, this.address);
-}
+//   const MyApp({super.key});
 
-class ScanMovesense extends StatefulWidget {
-  const ScanMovesense({super.key});
-
-  @override
-  State<ScanMovesense> createState() => _ScanMovesenseState();
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(home: ScanMovesense());
+//   }
+// }
 
 
-class _ScanMovesenseState extends State<ScanMovesense> {
+// class MovesenseDevice {
+//   final String name;
+//   final String address;
 
-  Stream<dynamic>? _accStream;
-  double? _ax;
-  double? _ay;
-  double? _az;
+//   MovesenseDevice(this.name, this.address);
+// }
 
-  String? _deviceSerial;
+// class ScanMovesense extends StatefulWidget {
+//   const ScanMovesense({super.key});
 
-  final List<MovesenseDevice> _devices = [];
-  bool _scanning = true;
-  String? _connectedAddress;
-  bool _connecting = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _startScan();
-  }
-
-  void _subscribeToAcc() {
-  if (_deviceSerial == null) return;
-
-  final uri = Mds.createSubscriptionUri(
-    _deviceSerial!,
-    "/Meas/Acc/13",
-  );
-
-  _accStream = MdsAsync.subscribe(uri, "{}");
-
-  _accStream!.listen((data) {
-    final acc = data["Body"]["ArrayAcc"][0];
-
-    setState(() {
-      _ax = acc["x"];
-      _ay = acc["y"];
-      _az = acc["z"];
-    });
-  }, onError: (err) {
-    debugPrint("ACC error: $err");
-  });
-}
+//   @override
+//   State<ScanMovesense> createState() => _ScanMovesenseState();
+// }
 
 
-  void _startScan() {
-    Mds.startScan((name, address) {
-      if (name == null || address == null) return;
+// class _ScanMovesenseState extends State<ScanMovesense> {
 
-      if (_devices.any((d) => d.address == address)) return;
+//   Stream<dynamic>? _accStream;
+//   double? _ax;
+//   double? _ay;
+//   double? _az;
 
-      setState(() {
-        _devices.add(MovesenseDevice(name, address));
-      });
+//   String? _deviceSerial;
 
-      debugPrint("Found device: $name ($address)");
-    });
+//   final List<MovesenseDevice> _devices = [];
+//   bool _scanning = true;
+//   String? _connectedAddress;
+//   bool _connecting = false;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _startScan();
+//   }
+
+//   void _subscribeToAcc() {
+//     if (_deviceSerial == null) return;
+
+//     final uri = Mds.createSubscriptionUri(_deviceSerial!, "/Meas/Acc/13");
+
+//     _accStream = MdsAsync.subscribe(uri, "{}");
+
+//     _accStream!.listen(
+//       (data) {
+//         final acc = data["Body"]["ArrayAcc"][0];
+
+//         setState(() {
+//           _ax = acc["x"];
+//           _ay = acc["y"];
+//           _az = acc["z"];
+//         });
+//       },
+//       onError: (err) {
+//         debugPrint("ACC error: $err");
+//       },
+//     );
+//   }
+
+//   void _startScan() {
+//     Mds.startScan((name, address) {
+//       if (name == null || address == null) return;
+
+//       if (_devices.any((d) => d.address == address)) return;
+
+//       setState(() {
+//         _devices.add(MovesenseDevice(name, address));
+//       });
+
+//       debugPrint("Found device: $name ($address)");
+//     });
 
 
-    Future.delayed(const Duration(seconds: 10), () {
-      Mds.stopScan();
-      if (mounted) {
-        setState(() {
-          _scanning = false;
-        });
-      }
-      debugPrint("Scan finished");
-    });
-  }
+//     Future.delayed(const Duration(seconds: 10), () {
+//       Mds.stopScan();
+//       if (mounted) {
+//         setState(() {
+//           _scanning = false;
+//         });
+//       }
+//       debugPrint("Scan finished");
+//     });
+//   }
 
-  void _connect(String address) {
-  if (_connecting) return;
+//   void _connect(String address) {
+//     if (_connecting) return;
 
-  setState(() {
-    _connecting = true;
-  });
+//     setState(() {
+//       _connecting = true;
+//     });
 
-  Mds.stopScan();
+//     Mds.stopScan();
 
-  Mds.connect(
-    address,
+//     Mds.connect(
+//       address,
 
-    (serial) {
-      debugPrint("Connected: $serial");
-      setState(() {
-        _deviceSerial = serial;
-        _connectedAddress = address;
-        _connecting = false;
-      });
+//       (serial) {
+//        debugPrint("Connected: $serial");
+//         setState(() {
+//           _deviceSerial = serial;
+//           _connectedAddress = address;
+//           _connecting = false;
+//         });
 
-      _subscribeToAcc();
-    },
+//         _subscribeToAcc();
+//       },
 
-    () {
-      debugPrint("Disconnected");
-      setState(() {
-        _connectedAddress = null;
-        _connecting = false;
-      });
-    },
+//       () {
+//         debugPrint("Disconnected");
+//         setState(() {
+//           _connectedAddress = null;
+//           _connecting = false;
+//         });
+//       },
 
-    (error) {
-      debugPrint("Connection error: $error");
-      setState(() {
-        _connecting = false;
-      });
-    },
+//       (error) {
+//         debugPrint("Connection error: $error");
+//         setState(() {
+//           _connecting = false;
+//         });
+//       },
 
-    (bleAddress) {
-      debugPrint("BLE connected: $bleAddress");
-    },
-  );
-}
+//       (bleAddress) {
+//         debugPrint("BLE connected: $bleAddress");
+//       },
+//     );
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Scan Movesense Devices"),
-      ),
-      body: Center(
-        child: _connectedAddress == null ? _buildScanList()
-      : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Accelerometer (13 Hz)",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Text("X: ${_ax?.toStringAsFixed(2) ?? "-"}"),
-            Text("Y: ${_ay?.toStringAsFixed(2) ?? "-"}"),
-            Text("Z: ${_az?.toStringAsFixed(2) ?? "-"}"),
-          ],
-        ),
-      ),
-    );
-  }
-  Widget _buildScanList() {
-  if (_scanning) {
-    return const Text("Scanning for Movesense devices...");
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text("Scan Movesense Devices")),
+//       body: Center(
+//         child: _connectedAddress == null
+//             ? _buildScanList()
+//             : Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   const Text(
+//                     "Accelerometer (13 Hz)",
+//                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//                   ),
+//                   const SizedBox(height: 16),
+//                   Text("X: ${_ax?.toStringAsFixed(2) ?? "-"}"),
+//                   Text("Y: ${_ay?.toStringAsFixed(2) ?? "-"}"),
+//                   Text("Z: ${_az?.toStringAsFixed(2) ?? "-"}"),
+//                 ],
+//               ),
+//       ),
+//     );
+//   }
 
-  if (_devices.isEmpty) {
-    return const Text("No devices found");
-  }
+//   Widget _buildScanList() {
+//     if (_scanning) {
+//       return const Text("Scanning for Movesense devices...");
+//     }
 
-  return ListView.builder(
-    itemCount: _devices.length,
-    itemBuilder: (context, index) {
-      final device = _devices[index];
+//     if (_devices.isEmpty) {
+//       return const Text("No devices found");
+//     }
 
-      return ListTile(
-        title: Text(device.name),
-        subtitle: Text(device.address),
-        onTap: () => _connect(device.address),
-      );
-    },
-  );
-}
+//     return ListView.builder(
+//       itemCount: _devices.length,
+//       itemBuilder: (context, index) {
+//         final device = _devices[index];
 
-}
+//         return ListTile(
+//           title: Text(device.name),
+//           subtitle: Text(device.address),
+//           onTap: () => _connect(device.address),
+//         );
+//       },
+//     );
+//   }
+// }
