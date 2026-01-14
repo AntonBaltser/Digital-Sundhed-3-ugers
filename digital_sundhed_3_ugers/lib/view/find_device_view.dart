@@ -3,7 +3,9 @@ part of '../../main.dart';
 class FindDevice extends StatelessWidget {
   FindDevice({super.key});
   
-  final viewModel = IndinvidualInfoViewModel();
+  final findDeviceViewModel = FindDeviceViewModel(
+    manager: MovesenseManager(address: 'ED5C59BE-624A-440F-6D57-CDFE4C0B7947')
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +65,22 @@ class FindDevice extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
-                    debugPrint('Moving to LoadingScreen ...');
-                    Navigator.push(
+                    final future = findDeviceViewModel.connect();
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return MainScreen();
-                        },
-                      ),
+                      MaterialPageRoute(builder: (_) => LoadingScreen(
+                        connectFuture: future,
+                      ))
                     );
+                    debugPrint('Moving to LoadingScreen ...');
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return MainScreen();
+                    //     },
+                    //   ),
+                    // );
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -80,7 +89,7 @@ class FindDevice extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: const Text(
-                      'Find Device',
+                      'Connect',
                       style: TextStyle(
                         color: Color.fromRGBO(0, 100, 217, 1),
                         fontSize: 33,

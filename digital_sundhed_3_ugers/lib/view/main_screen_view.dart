@@ -1,7 +1,8 @@
 part of '../../main.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+
+   MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -130,9 +131,10 @@ class _MainScreenState extends State<MainScreen> {
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
                   opacity: isExpanded ? 1.0 : 0.0,
+                  
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children:  [
                       Text(
                         'Data',
                         style: TextStyle(
@@ -188,6 +190,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
+    
                     setState(() {
                       isExpanded = !isExpanded;
                     });

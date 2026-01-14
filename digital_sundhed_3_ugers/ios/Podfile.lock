@@ -10,7 +10,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - mdsflutter (from `.symlinks/plugins/mdsflutter/ios`)
-  - Movesense (from `/Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Movesense/movesense-mobile-lib`)
+  - Movesense (from `https://bitbucket.org/movesense/movesense-mobile-lib.git`)
 
 SPEC REPOS:
   trunk:
@@ -22,7 +22,12 @@ EXTERNAL SOURCES:
   mdsflutter:
     :path: ".symlinks/plugins/mdsflutter/ios"
   Movesense:
-    :path: "/Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Movesense/movesense-mobile-lib"
+    :git: https://bitbucket.org/movesense/movesense-mobile-lib.git
+
+CHECKOUT OPTIONS:
+  Movesense:
+    :commit: 4df9f7e709b5d6d606eb4f7b80bc4942e8540f07
+    :git: https://bitbucket.org/movesense/movesense-mobile-lib.git
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
@@ -30,6 +35,6 @@ SPEC CHECKSUMS:
   Movesense: dc64047c1feb856b7f7ac6ea2c67685350d99dd5
   SwiftProtobuf: e1b437c8e31a4c5577b643249a0bb62ed4f02153
 
-PODFILE CHECKSUM: 8d5edc37947a290b136205b524b1f7b236acb3da
+PODFILE CHECKSUM: f7c44ead06aa114b2b28ea7aadd2b4891abe57c5
 
 COCOAPODS: 1.16.2
