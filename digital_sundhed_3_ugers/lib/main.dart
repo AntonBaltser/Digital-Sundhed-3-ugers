@@ -76,7 +76,7 @@ void main() async {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: IndividualInfo(),
+      home: CreateAccount(),
     );
   }
 }
