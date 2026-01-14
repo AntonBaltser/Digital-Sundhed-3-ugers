@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mdsflutter/Mds.dart';
 import 'package:movesense_plus/movesense_plus.dart';
+import 'package:flutter/services.dart';
+
 
 part 'model/DataModel/Location.dart';
-part 'model/DataModel/Movement.dart';
+part 'model/DataModel/movement.dart';
 part 'model/LogicModel/location_manager.dart';
 part 'model/LogicModel/movement_detector.dart';
 part 'model/LogicModel/movesense_manager.dart';
 part 'model/DataModel/person.dart';
 part 'model/LogicModel/data_manager.dart';
 part 'model/LogicModel/message_manager.dart';
-import 'package:flutter/services.dart';
 
 part 'view_model/create_acount_viewmodel.dart';
 part 'view_model/individual_info_viewmodel.dart';
@@ -32,20 +32,18 @@ void main() async {
   runApp(const MyApp());
 }
 
-// void main() {
-//   runApp(const MyApp());
-// }
+class MyApp extends StatelessWidget {
 
+  const MyApp({super.key});
 
-// class MyApp extends StatelessWidget {
-
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(home: ScanMovesense());
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: CreateAccount()
+      );
+  }
+}
 
 
 // class MovesenseDevice {
@@ -71,15 +69,6 @@ void main() async {
 //   double? _az;
 
 //   String? _deviceSerial;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: CreateAccount(),
-    );
-  }
-}
 
 //---------------------------------------------------
 

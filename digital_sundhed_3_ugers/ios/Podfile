@@ -35,7 +35,7 @@ flutter_ios_podfile_setup
 
 # Movesense will failed at Xcode build time
 target 'Runner' do
-  pod 'Movesense', :path => '/ios/Movesense/movesense-mobile-lib'
+  pod 'Movesense', :path => '/Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Movesense/movesense-mobile-lib'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
