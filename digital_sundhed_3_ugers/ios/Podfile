@@ -34,10 +34,20 @@ flutter_ios_podfile_setup
 # end
 
 # Movesense will failed at Xcode build time
+
 target 'Runner' do
-  pod 'Movesense', :path => '/Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Movesense/movesense-mobile-lib'
+  use_modular_headers!
+  use_frameworks! :linkage => :static
+
+  pod 'Movesense', :git => 'https://bitbucket.org/movesense/movesense-mobile-lib.git'
+
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
+
+# target 'Runner' do
+#   pod 'Movesense', :path => '/Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Movesense/movesense-mobile-lib'
+#   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+# end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
