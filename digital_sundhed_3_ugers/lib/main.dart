@@ -13,7 +13,7 @@ part 'view/loading_screen_view.dart';
 part 'view/main_screen_view.dart';
 
 void main() async {
-  // Lås skærmens rotation
+  // Lock screen rotation
   WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

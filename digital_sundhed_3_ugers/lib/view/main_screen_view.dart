@@ -286,7 +286,6 @@ class _MainScreenState extends State<MainScreen> {
               top: 62,
               left: 287,
               right: -7,
-              //height: 75,
               child: Image.asset('assets/images/MoveSense.jpg'),
             ),
             Positioned(
