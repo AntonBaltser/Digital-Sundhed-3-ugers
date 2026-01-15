@@ -70,45 +70,6 @@ class LoadingScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              bottom: -20,
-              left: -5,
-              right: -5,
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(74, 144, 226, 1),
-                  borderRadius: BorderRadius.circular(70),
-                ),
-              ),
-            ),
-
-            Positioned(
-              bottom: -20,
-              left: -5,
-              right: -5,
-              child: Container(
-                height: 217,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(32, 117, 216, 1),
-                  borderRadius: BorderRadius.circular(70),
-                ),
-              ),
-            ),
-
-            Positioned(
-              bottom: -20,
-              left: -5,
-              right: -5,
-              child: Container(
-                height: 127,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0, 100, 217, 1),
-                  borderRadius: BorderRadius.circular(70),
-                ),
-              ),
-            ),
-
-            Positioned(
               top: 200,
               left: -150,
               right: -150,
