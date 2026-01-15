@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'package:flutter/services.dart';
 
-// import 'dart:async';
+import 'dart:async';
 
 part 'model/DataModel/Location.dart';
 part 'model/DataModel/movement.dart';
@@ -18,6 +18,7 @@ part 'view_model/individual_info_viewmodel.dart';
 part 'view_model/caretaker_info_viewmodel.dart';
 part 'view_model/main_screen_viewmodel.dart';
 part 'view_model/find_device_viewmodel.dart';
+part 'view_model/loading_screen_viewmodel.dart';
 
 part 'view/create_acount_view.dart';
 part 'view/individual_info_view.dart';
@@ -26,13 +27,14 @@ part 'view/find_device_view.dart';
 part 'view/loading_screen_view.dart';
 part 'view/main_screen_view.dart';
 
-final MovesenseManager movesense = MovesenseManager(address: 'ED5C59BE-624A-440F-6D57-CDFE4C0B7947');
+late final MovesenseManager movesense;
 
-void main() async {
-  // Lock screen rotation
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  movesense = MovesenseManager(
+    address: '2E37B870-A014-74F7-89DE-5060CF703A2F',
+  );
 
   runApp(const MyApp());
 }
@@ -50,6 +52,15 @@ class MyApp extends StatelessWidget {
       );
   }
 }
+
+// void main() async {
+//   // Lock screen rotation
+//   WidgetsFlutterBinding.ensureInitialized();
+
+//   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+//   runApp(const MyApp());
+// }
 
 // class MyApp extends StatelessWidget {
 

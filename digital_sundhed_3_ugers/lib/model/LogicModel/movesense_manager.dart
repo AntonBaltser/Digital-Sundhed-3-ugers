@@ -1,24 +1,22 @@
 part of '../../main.dart';
 
-// Under er en måskelinje som chatten har forslået:
-//enum ConnectionStatus { disconnected, connecting, connected }
-
 class MovesenseManager {
   final String address;
-  MovesenseDevice? device;
+  late final MovesenseDevice device;
 
-  MovesenseManager({
-    required this.address,
-  });
-
-  Future<void> connect() async {
-  device = MovesenseDevice(address: address);
-    if(!device!.isConnected){
-      await device!.connect();
-      debugPrint("device is connected");
-      // await device?.getDeviceInfo();
-    }
+  MovesenseManager({required this.address}) {
+    device = MovesenseDevice(address: address);
   }
 
-  Future<void> disconnect() async {}
+  Future<void> connect() async {
+    debugPrint('MovesenseManager.connect() called');
+
+    if (device.isConnected) {
+      debugPrint('Already connected');
+      return;
+    }
+
+    debugPrint('Trying to connect to $address');
+    await device.connect();
+  }
 }

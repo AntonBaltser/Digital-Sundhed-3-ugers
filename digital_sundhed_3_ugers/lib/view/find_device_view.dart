@@ -2,10 +2,8 @@ part of '../../main.dart';
 
 class FindDevice extends StatelessWidget {
   FindDevice({super.key});
-  
-  final findDeviceViewModel = FindDeviceViewModel(
-    manager: MovesenseManager(address: 'ED5C59BE-624A-440F-6D57-CDFE4C0B7947')
-  );
+
+  final findDeviceViewModel = FindDeviceViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +12,7 @@ class FindDevice extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SizedBox(
         height: screenHeight,
-        width: double.infinity, 
+        width: double.infinity,
         child: Stack(
           children: [
             Positioned(
@@ -25,7 +23,7 @@ class FindDevice extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(74, 144, 226, 1),
-                  borderRadius: BorderRadius.circular(70)
+                  borderRadius: BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -38,7 +36,7 @@ class FindDevice extends StatelessWidget {
                 height: 217,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(32, 117, 216, 1),
-                  borderRadius: BorderRadius.circular(70)
+                  borderRadius: BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -51,7 +49,7 @@ class FindDevice extends StatelessWidget {
                 height: 127,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(0, 100, 217, 1),
-                  borderRadius: BorderRadius.circular(70)
+                  borderRadius: BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -64,23 +62,15 @@ class FindDevice extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
-                  onTap: () {
-                    final future = findDeviceViewModel.connect();
+                  onTap: () async {
+                    // Vent på at forbindelsen er oprettet
+                    await findDeviceViewModel.connect();
+
+                    // Naviger til LoadingScreen
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => LoadingScreen(
-                        connectFuture: future,
-                      ))
+                      MaterialPageRoute(builder: (_) => LoadingScreen()),
                     );
-                    debugPrint('Moving to LoadingScreen ...');
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) {
-                    //       return MainScreen();
-                    //     },
-                    //   ),
-                    // );
                   },
                   child: Container(
                     decoration: BoxDecoration(
