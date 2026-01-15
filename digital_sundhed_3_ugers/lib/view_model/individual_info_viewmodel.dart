@@ -22,6 +22,7 @@ class IndinvidualInfoViewModel extends ChangeNotifier {
     return diagnoseController.text;
   }
 
+  @override
   void dispose() {
     nameController.dispose();
     phoneController.dispose();
