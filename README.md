@@ -5,7 +5,7 @@ Kør 'make build' i terminalen.
 
 
 
-**Denne kode kan omdanne hele lib-filen til en text-fil som kan uploaded til AI-debugger. **
+**Denne kode kan omdanne hele lib-filen til en text-fil som kan uploaded til AI-debugger. Indsæt det i terminalen**
 ```
 cd digital_sundhed_3_ugers
 find lib -name "*.dart" -print0 \
