@@ -1,8 +1,7 @@
 part of '../../main.dart';
 
 class MainScreen extends StatefulWidget {
-
-   MainScreen({super.key});
+  MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -10,6 +9,28 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   bool isExpanded = false;
+
+  int? heartRate;
+  StreamSubscription? _hrSub;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // START HR SUBSCRIBE
+    _hrSub = movesense.device.hr.listen((hr) {
+      debugPrint('HR: $hr');
+      setState(() {
+        heartRate = hr;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _hrSub?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                   color: const Color.fromARGB(255, 73, 159, 49),
                   borderRadius: BorderRadius.circular(20),
                 ),
-              child: Center(
-                child: Image.asset('assets/images/Check.png'),
-              ),
+                child: Center(child: Image.asset('assets/images/Check.png')),
               ),
             ),
 
@@ -131,12 +150,12 @@ class _MainScreenState extends State<MainScreen> {
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
                   opacity: isExpanded ? 1.0 : 0.0,
-                  
+
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
+                    children: [
                       Text(
-                        'Data',
+                        'HeartRate',
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
@@ -146,11 +165,13 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       SizedBox(height: 12),
                       Text(
-                        'Her kommer data fra ViewModel senere',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white70,
-                          height: 1.4,
+                        heartRate != null
+                            ? 'Puls: $heartRate bpm'
+                            : 'Måler puls...',
+                        style: const TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
 
@@ -190,7 +211,6 @@ class _MainScreenState extends State<MainScreen> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
-    
                     setState(() {
                       isExpanded = !isExpanded;
                     });
