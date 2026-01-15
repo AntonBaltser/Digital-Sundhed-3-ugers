@@ -10,25 +10,23 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   bool isExpanded = false;
 
-  int? heartRate;
-  StreamSubscription? _hrSub;
+  late final MainScreenViewModel vm;
 
   @override
   void initState() {
     super.initState();
+    vm = MainScreenViewModel(movesense)..start();
+    vm.addListener(_onUpdate);
+  }
 
-    // START HR SUBSCRIBE
-    _hrSub = movesense.device.hr.listen((hr) {
-      debugPrint('HR: $hr');
-      setState(() {
-        heartRate = hr;
-      });
-    });
+  void _onUpdate() {
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
-    _hrSub?.cancel();
+    vm.removeListener(_onUpdate);
+    vm.dispose();
     super.dispose();
   }
 
@@ -155,7 +153,7 @@ class _MainScreenState extends State<MainScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'HeartRate',
+                        'Accelerometer',
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
@@ -165,13 +163,15 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       SizedBox(height: 12),
                       Text(
-                        heartRate != null
-                            ? 'Puls: $heartRate bpm'
-                            : 'Måler puls...',
+                        vm.accX != null
+                            ? 'X: ${vm.accX!.toStringAsFixed(2)}\n'
+                                  'Y: ${vm.accY!.toStringAsFixed(2)}\n'
+                                  'Z: ${vm.accZ!.toStringAsFixed(2)}'
+                            : 'Måler bevægelse...',
                         style: const TextStyle(
-                          fontSize: 22,
+                          fontSize: 18,
                           color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                          height: 1.4,
                         ),
                       ),
 
