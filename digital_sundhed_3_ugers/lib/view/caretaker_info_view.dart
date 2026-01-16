@@ -134,8 +134,9 @@ class CareTakerInfo extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
+                    currentCaretaker = viewModel.buildCaretaker();
                     debugPrint(
-                      'Name: ${viewModel.name} \n Phone: ${viewModel.phone}',
+                      'Name: ${currentCaretaker?.name} \n Phone: ${currentCaretaker?.phoneNumber}',
                     );
                     debugPrint('Moving to FindDevice ...');
                     Navigator.push(

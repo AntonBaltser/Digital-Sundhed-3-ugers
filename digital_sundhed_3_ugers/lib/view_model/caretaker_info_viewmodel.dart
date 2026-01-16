@@ -1,17 +1,17 @@
 part of '../../main.dart';
 
 class CareTakerInfoViewModel extends ChangeNotifier {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
 
-  String get name {
-    return nameController.text;
+  String get name => nameController.text;
+  String get phone => phoneController.text;
+
+  Caretaker buildCaretaker() {
+    return Caretaker(name, phone);
   }
 
-  String get phone {
-    return phoneController.text;
-  }
-
+  @override
   void dispose() {
     nameController.dispose();
     phoneController.dispose();

@@ -1,8 +1,7 @@
 part of '../../main.dart';
 
 class MainScreen extends StatefulWidget {
-
-   MainScreen({super.key});
+  MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -56,9 +55,9 @@ class _MainScreenState extends State<MainScreen> {
                   color: const Color.fromARGB(255, 73, 159, 49),
                   borderRadius: BorderRadius.circular(20),
                 ),
-              child: Center(
-                child: Image.asset('assets/images/Check.png'),
-              ),
+                child: Center(
+                  child: Image.asset('assets/images/Check.png'),
+                ),
               ),
             ),
 
@@ -71,10 +70,9 @@ class _MainScreenState extends State<MainScreen> {
                 curve: Curves.easeOut,
                 height: isExpanded ? 700 : 300,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(74, 144, 226, 1),
-                  borderRadius: isExpanded
-                      ? BorderRadius.circular(90)
-                      : BorderRadius.circular(70),
+                  color: const Color.fromRGBO(74, 144, 226, 1),
+                  borderRadius:
+                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -88,10 +86,9 @@ class _MainScreenState extends State<MainScreen> {
                 curve: Curves.easeOut,
                 height: isExpanded ? 500 : 217,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(32, 117, 216, 1),
-                  borderRadius: isExpanded
-                      ? BorderRadius.circular(90)
-                      : BorderRadius.circular(70),
+                  color: const Color.fromRGBO(32, 117, 216, 1),
+                  borderRadius:
+                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -105,37 +102,39 @@ class _MainScreenState extends State<MainScreen> {
                 curve: Curves.easeOut,
                 height: isExpanded ? 300 : 127,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(0, 100, 217, 1),
-                  borderRadius: isExpanded
-                      ? BorderRadius.circular(90)
-                      : BorderRadius.circular(70),
+                  color: const Color.fromRGBO(0, 100, 217, 1),
+                  borderRadius:
+                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
                 ),
               ),
             ),
 
             Positioned(
-              bottom: -20,
+              bottom: -30,
               left: 40,
               right: 40,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOut,
                 height: isExpanded ? 700 : 300,
-                padding: const EdgeInsets.fromLTRB(40, 40, 40, 120),
+
+                // LIDT MERE BUND-PADDING så der er plads til knappen
+                padding: const EdgeInsets.fromLTRB(40, 40, 40, 160),
+
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: isExpanded
-                      ? BorderRadius.circular(90)
-                      : BorderRadius.circular(70),
+                  borderRadius:
+                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
                 ),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
                   opacity: isExpanded ? 1.0 : 0.0,
-                  
-                  child: Column(
+                  child: SingleChildScrollView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
-                      Text(
+                    children: [
+                      const Text(
                         'Data',
                         style: TextStyle(
                           fontSize: 22,
@@ -144,8 +143,8 @@ class _MainScreenState extends State<MainScreen> {
                           fontFamily: 'geologica',
                         ),
                       ),
-                      SizedBox(height: 12),
-                      Text(
+                      const SizedBox(height: 12),
+                      const Text(
                         'Her kommer data fra ViewModel senere',
                         style: TextStyle(
                           fontSize: 18,
@@ -154,10 +153,10 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 110),
+                      const SizedBox(height: 70),
 
-                      Text(
-                        'Data',
+                      const Text(
+                        'User information',
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
@@ -165,23 +164,52 @@ class _MainScreenState extends State<MainScreen> {
                           fontFamily: 'geologica',
                         ),
                       ),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Text(
-                        'Her kommer data fra ViewModel senere',
-                        style: TextStyle(
+                        'Name: ${currentIndividual?.name} \n'
+                        'Number: ${currentIndividual?.phoneNumber} \n'
+                        'CPR: ${currentIndividual?.id} \n'
+                        'Diagnose: ${currentIndividual?.diagnose}',
+                        style: const TextStyle(
                           fontSize: 18,
                           color: Colors.white70,
                           height: 1.4,
                         ),
                       ),
-                    ],
+
+                      const SizedBox(height: 70),
+
+                      // NY BOKS: Caretaker information
+                      const Text(
+                        'Caretaker information',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontFamily: 'geologica',
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Name: ${currentCaretaker?.name} \n'
+                        'Number: ${currentCaretaker?.phoneNumber}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.white70,
+                          height: 1.4,
+                        ),
+                      ),
+                  ],
+  ),
+
                   ),
                 ),
               ),
             ),
 
+            // Flyttet knap ned: top -> bottom
             Positioned(
-              top: 680,
+              bottom: 35,
               left: 30,
               right: 100,
               height: 65,
@@ -190,7 +218,6 @@ class _MainScreenState extends State<MainScreen> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
-    
                     setState(() {
                       isExpanded = !isExpanded;
                     });
@@ -215,8 +242,9 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
 
+            // Flyttet den lille hvide knap ned
             Positioned(
-              top: 680,
+              bottom: 35,
               left: 300,
               right: 30,
               height: 65,
@@ -243,22 +271,19 @@ class _MainScreenState extends State<MainScreen> {
                         pageBuilder: (context, animation, secondaryAnimation) {
                           return CreateAccount();
                         },
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) {
-                              const begin = Offset(-1.0, 0.0);
-                              const end = Offset.zero;
-                              const curve = Curves.easeOut;
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(-1.0, 0.0);
+                          const end = Offset.zero;
+                          const curve = Curves.easeOut;
 
-                              final tween = Tween(
-                                begin: begin,
-                                end: end,
-                              ).chain(CurveTween(curve: curve));
+                          final tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
 
-                              return SlideTransition(
-                                position: animation.drive(tween),
-                                child: child,
-                              );
-                            },
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
                       ),
                     );
                   },
@@ -267,8 +292,9 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
 
+            // Flyttet pil ned så den følger knapperne
             Positioned(
-              top: isExpanded ? 685 : 690,
+              bottom: 43,
               left: 300,
               right: isExpanded ? 28 : 32.5,
               height: 49,

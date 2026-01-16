@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'package:flutter/services.dart';
 
-// import 'dart:async';
+import 'dart:async';
 
 part 'model/DataModel/Location.dart';
 part 'model/DataModel/movement.dart';
@@ -27,6 +27,9 @@ part 'view/loading_screen_view.dart';
 part 'view/main_screen_view.dart';
 
 final MovesenseManager movesense = MovesenseManager(address: 'ED5C59BE-624A-440F-6D57-CDFE4C0B7947');
+Individual? currentIndividual;
+Caretaker? currentCaretaker;
+
 
 void main() async {
   // Lock screen rotation

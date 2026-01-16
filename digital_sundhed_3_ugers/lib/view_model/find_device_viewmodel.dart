@@ -22,7 +22,6 @@ class FindDeviceViewModel extends ChangeNotifier {
 
     try {
       await manager.connect();
-      status = ConnectionStatus.connected;
     } catch (e) {
       status = ConnectionStatus.error;
       errorMeassage = e.toString();
