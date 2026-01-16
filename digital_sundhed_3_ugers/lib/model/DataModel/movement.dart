@@ -9,14 +9,12 @@ class Movement {
 }
 
 class Fall extends Movement {
-  /// How severe is the fall on a scale from 0 to 10.
-  int severeness = 0;
-
-  Fall(super.place, super.time, this.severeness, super.individual);
+  // How severe is the fall on a scale from 0 to 10.
+  Fall(super.place, super.time, super.individual);
 }
 
 class Walk extends Movement {
-  /// The number of minutes walked during this walk session.
+  // The number of minutes walked during this walk session.
   int minuttes;
 
   Walk(super.place, super.time, this.minuttes, super.individual);
@@ -27,7 +25,7 @@ class MovementHistory {
   DataManager database;
   MovementDetector detector;
 
-  /// This construtor also listens to the stream.
+  // This construtor also listens to the stream.
   MovementHistory(this.database, this.detector) {
     detector.movementDetection().listen((movement) {
       addMovement(movement);

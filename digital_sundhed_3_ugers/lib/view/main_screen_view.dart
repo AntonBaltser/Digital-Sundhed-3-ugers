@@ -13,6 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final viewModel = MainScreenViewModel();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -69,8 +70,9 @@ class _MainScreenState extends State<MainScreen> {
                 height: isExpanded ? 700 : 300,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(74, 144, 226, 1),
-                  borderRadius:
-                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
+                  borderRadius: isExpanded
+                      ? BorderRadius.circular(90)
+                      : BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -85,8 +87,9 @@ class _MainScreenState extends State<MainScreen> {
                 height: isExpanded ? 500 : 217,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(32, 117, 216, 1),
-                  borderRadius:
-                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
+                  borderRadius: isExpanded
+                      ? BorderRadius.circular(90)
+                      : BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -101,8 +104,9 @@ class _MainScreenState extends State<MainScreen> {
                 height: isExpanded ? 300 : 127,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(0, 100, 217, 1),
-                  borderRadius:
-                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
+                  borderRadius: isExpanded
+                      ? BorderRadius.circular(90)
+                      : BorderRadius.circular(70),
                 ),
               ),
             ),
@@ -121,8 +125,9 @@ class _MainScreenState extends State<MainScreen> {
 
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius:
-                      isExpanded ? BorderRadius.circular(90) : BorderRadius.circular(70),
+                  borderRadius: isExpanded
+                      ? BorderRadius.circular(90)
+                      : BorderRadius.circular(70),
                 ),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
@@ -130,76 +135,75 @@ class _MainScreenState extends State<MainScreen> {
                   child: SingleChildScrollView(
                     physics: const NeverScrollableScrollPhysics(),
                     child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Data',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontFamily: 'geologica',
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Accelerometer',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontFamily: 'geologica',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      const Text(
-                        'Her kommer data fra ViewModel senere',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white70,
-                          height: 1.4,
+                        const SizedBox(height: 12),
+                        Text(
+                          '${viewModel.fallCount()}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white70,
+                            height: 1.4,
+                          ),
                         ),
-                      ),
 
-                      const SizedBox(height: 70),
+                        const SizedBox(height: 70),
 
-                      const Text(
-                        'User information',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontFamily: 'geologica',
+                        Text(
+                          'User information',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontFamily: 'geologica',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Name: ${currentIndividual?.name} \n'
-                        'Number: ${currentIndividual?.phoneNumber} \n'
-                        'CPR: ${currentIndividual?.id} \n'
-                        'Diagnose: ${currentIndividual?.diagnose}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.white70,
-                          height: 1.4,
+                        const SizedBox(height: 12),
+                        Text(
+                          'Name: ${currentIndividual.name} \n'
+                          'Number: ${currentIndividual.phoneNumber} \n'
+                          'CPR: ${currentIndividual.id} \n'
+                          'Diagnose: ${currentIndividual.diagnose}',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.white70,
+                            height: 1.4,
+                          ),
                         ),
-                      ),
 
-                      const SizedBox(height: 70),
+                        const SizedBox(height: 70),
 
-                      // NY BOKS: Caretaker information
-                      const Text(
-                        'Caretaker information',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontFamily: 'geologica',
+                        // NY BOKS: Caretaker information
+                        const Text(
+                          'Caretaker information',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontFamily: 'geologica',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Name: ${currentCaretaker?.name} \n'
-                        'Number: ${currentCaretaker?.phoneNumber}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.white70,
-                          height: 1.4,
+                        const SizedBox(height: 12),
+                        Text(
+                          'Name: ${currentCaretaker.name} \n'
+                          'Number: ${currentCaretaker.phoneNumber}',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.white70,
+                            height: 1.4,
+                          ),
                         ),
-                      ),
-                  ],
-  ),
-
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -269,19 +273,22 @@ class _MainScreenState extends State<MainScreen> {
                         pageBuilder: (context, animation, secondaryAnimation) {
                           return CreateAccount();
                         },
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          const begin = Offset(-1.0, 0.0);
-                          const end = Offset.zero;
-                          const curve = Curves.easeOut;
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                              const begin = Offset(-1.0, 0.0);
+                              const end = Offset.zero;
+                              const curve = Curves.easeOut;
 
-                          final tween = Tween(begin: begin, end: end)
-                              .chain(CurveTween(curve: curve));
+                              final tween = Tween(
+                                begin: begin,
+                                end: end,
+                              ).chain(CurveTween(curve: curve));
 
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
+                              return SlideTransition(
+                                position: animation.drive(tween),
+                                child: child,
+                              );
+                            },
                       ),
                     );
                   },

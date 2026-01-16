@@ -199,10 +199,10 @@ class IndividualInfo extends StatelessWidget {
                     currentIndividual = viewModel.buildIndividual();
 
                      debugPrint(
-                        'Name: ${currentIndividual?.name}\n'
-                        'Phone: ${currentIndividual?.phoneNumber}\n'
-                        'Cpr-nr: ${currentIndividual?.id}\n'
-                        'Diagnose: ${currentIndividual?.diagnose}',
+                        'Name: ${currentIndividual.name}\n'
+                        'Phone: ${currentIndividual.phoneNumber}\n'
+                        'Cpr-nr: ${currentIndividual.id}\n'
+                        'Diagnose: ${currentIndividual.diagnose}',
   );
                     debugPrint('Moving to CareTakerInfo ...');
                     Navigator.push(

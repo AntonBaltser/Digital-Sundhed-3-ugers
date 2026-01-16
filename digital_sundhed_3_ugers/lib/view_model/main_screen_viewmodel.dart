@@ -1,45 +1,22 @@
 part of '../../main.dart';
 
 class MainScreenViewModel extends ChangeNotifier {
-  final MovesenseManager movesense;
+  MovementDetector movementDetector = activeMovementDetector;
+  MovesenseManager movesense = activeMovesense;
+  Individual individual = currentIndividual;
 
-  MainScreenViewModel(this.movesense);
 
-  int? heartRate;
+  MainScreenViewModel() {
+    movementDetector.addListener(notifyListeners);
+  }
 
-  double? accX, accY, accZ;
-  double? gyroX, gyroY, gyroZ;
-
-  StreamSubscription? _hrSub;
-  StreamSubscription? _imuSub;
-
-  void start() {
-    _hrSub = movesense.device.hr.listen((hr) {
-      heartRate = hr;
-      notifyListeners();
-    });
-
-    _imuSub = movesense.device.imu.listen((imu) {
-      final acc = imu.accelerometer.last;
-      final gyro = imu.gyroscope.last;
-
-      accX = acc.x.toDouble();
-      accY = acc.y.toDouble();
-      accZ = acc.z.toDouble();
-
-      gyroX = gyro.x.toDouble();
-      gyroY = gyro.y.toDouble();
-      gyroZ = gyro.z.toDouble();
-
-      notifyListeners();
-    });
+  int fallCount() {
+    return movementDetector._movements.length;
   }
 
   @override
   void dispose() {
-    _hrSub?.cancel();
-    _imuSub?.cancel();
+    movementDetector.removeListener(notifyListeners);
     super.dispose();
   }
 }
-

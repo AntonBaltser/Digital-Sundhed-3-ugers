@@ -13,8 +13,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-      _sub = movesense.device.statusEvents.listen((status) {
+      _sub = activeMovesense.device.statusEvents.listen((status) {
         debugPrint('STATUS: $status');
+
+        activeMovementDetector = MovementDetector();
+        activeMovementDetector.start();
 
         if (status == DeviceConnectionStatus.connected && mounted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
