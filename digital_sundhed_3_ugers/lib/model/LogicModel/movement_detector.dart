@@ -1,11 +1,9 @@
 part of '../../main.dart';
 
 class MovementDetector {
-
-  
-  final MovesenseManager movesense;
-  final LocationManager location;
-  final Individual individual;
+  MovesenseManager movesense;
+  LocationManager location;
+  Individual individual;
 
   MovementDetector({
     required this.movesense,

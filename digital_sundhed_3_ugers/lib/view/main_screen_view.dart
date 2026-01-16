@@ -10,26 +10,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   bool isExpanded = false;
 
-  late final MainScreenViewModel vm;
-
-  @override
-  void initState() {
-    super.initState();
-    vm = MainScreenViewModel(movesense)..start();
-    vm.addListener(_onUpdate);
-  }
-
-  void _onUpdate() {
-    if (mounted) setState(() {});
-  }
-
-  @override
-  void dispose() {
-    vm.removeListener(_onUpdate);
-    vm.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -153,7 +133,7 @@ class _MainScreenState extends State<MainScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Accelerometer',
+                        'Data',
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
@@ -163,14 +143,10 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       SizedBox(height: 12),
                       Text(
-                        vm.accX != null
-                            ? 'X: ${vm.accX!.toStringAsFixed(2)}\n'
-                                  'Y: ${vm.accY!.toStringAsFixed(2)}\n'
-                                  'Z: ${vm.accZ!.toStringAsFixed(2)}'
-                            : 'Måler bevægelse...',
-                        style: const TextStyle(
+                        'Her kommer data fra ViewModel senere',
+                        style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.white70,
                           height: 1.4,
                         ),
                       ),
