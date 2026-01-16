@@ -55,9 +55,7 @@ class _MainScreenState extends State<MainScreen> {
                   color: const Color.fromARGB(255, 73, 159, 49),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Center(
-                  child: Image.asset('assets/images/Check.png'),
-                ),
+                child: Center(child: Image.asset('assets/images/Check.png')),
               ),
             ),
 

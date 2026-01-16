@@ -1,66 +1,42 @@
 part of '../../main.dart';
 
-class LoadingScreen extends StatelessWidget {
-
-  final MovesenseManager? manager;
-  LoadingScreen({super.key, required this.connectFuture, this.manager});
-
-  final Future<void> connectFuture;
-
+class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    
-        return FutureBuilder<void>(
-      future: connectFuture,
-      builder: (context, snapshot) {
-        // Hvis der kom en fejl under connect
-        if (snapshot.hasError) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      "Kunne ikke forbinde",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      snapshot.error.toString(),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context); // tilbage til FindDevice
-                      },
-                      child: const Text("Tilbage"),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        }
+  State<LoadingScreen> createState() => _LoadingScreenState();
+}
 
-        // Når forbindelsen er færdig: navigér videre
-        if (snapshot.connectionState == ConnectionState.done) {
-          WidgetsBinding.instance.addPostFrameCallback((_) async {
-            await Future.delayed(const Duration(seconds: 5));
-            
-            if (!context.mounted) return;
+class _LoadingScreenState extends State<LoadingScreen> {
+  StreamSubscription<DeviceConnectionStatus>? _sub;
 
+  @override
+  void initState() {
+    super.initState();
+      _sub = movesense.device.statusEvents.listen((status) {
+        debugPrint('STATUS: $status');
+
+        if (status == DeviceConnectionStatus.connected && mounted) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => MainScreen()),
             );
           });
         }
+      });
+    
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -70,57 +46,16 @@ class LoadingScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              bottom: -20,
-              left: -5,
-              right: -5,
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(74, 144, 226, 1),
-                  borderRadius: BorderRadius.circular(70),
-                ),
-              ),
-            ),
-
-            Positioned(
-              bottom: -20,
-              left: -5,
-              right: -5,
-              child: Container(
-                height: 217,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(32, 117, 216, 1),
-                  borderRadius: BorderRadius.circular(70),
-                ),
-              ),
-            ),
-
-            Positioned(
-              bottom: -20,
-              left: -5,
-              right: -5,
-              child: Container(
-                height: 127,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0, 100, 217, 1),
-                  borderRadius: BorderRadius.circular(70),
-                ),
-              ),
-            ),
-
-            Positioned(
               top: 200,
               left: -150,
               right: -150,
               height: 350,
               child: Image.asset('assets/images/Loading.gif'),
             ),
-
-            Positioned(
+            const Positioned(
               top: 500,
               left: 122,
-              right: 0,
-              child: const Text(
+              child: Text(
                 'Searching',
                 style: TextStyle(
                   color: Color.fromRGBO(66, 141, 227, 1),
@@ -135,6 +70,4 @@ class LoadingScreen extends StatelessWidget {
       ),
     );
   }
-        );
-  }
-  }
+}
