@@ -136,7 +136,7 @@ class CareTakerInfo extends StatelessWidget {
                   onTap: () {
                     currentCaretaker = viewModel.buildCaretaker();
                     debugPrint(
-                      'Name: ${currentCaretaker?.name} \n Phone: ${currentCaretaker?.phoneNumber}',
+                      'Name: ${currentCaretaker.name} \n Phone: ${currentCaretaker.phoneNumber}',
                     );
                     debugPrint('Moving to FindDevice ...');
                     Navigator.push(

@@ -13,7 +13,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-      _sub = movesense.device.statusEvents.listen((status) {
+      _sub = activeMovesense.device.statusEvents.listen((status) {
         debugPrint('STATUS: $status');
 
         if (status == DeviceConnectionStatus.connected && mounted) {

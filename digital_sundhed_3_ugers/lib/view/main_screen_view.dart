@@ -164,10 +164,10 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Name: ${currentIndividual?.name} \n'
-                        'Number: ${currentIndividual?.phoneNumber} \n'
-                        'CPR: ${currentIndividual?.id} \n'
-                        'Diagnose: ${currentIndividual?.diagnose}',
+                        'Name: ${currentIndividual.name} \n'
+                        'Number: ${currentIndividual.phoneNumber} \n'
+                        'CPR: ${currentIndividual.id} \n'
+                        'Diagnose: ${currentIndividual.diagnose}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.white70,
@@ -189,8 +189,8 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Name: ${currentCaretaker?.name} \n'
-                        'Number: ${currentCaretaker?.phoneNumber}',
+                        'Name: ${currentCaretaker.name} \n'
+                        'Number: ${currentCaretaker.phoneNumber}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.white70,

@@ -27,15 +27,16 @@ part 'view/find_device_view.dart';
 part 'view/loading_screen_view.dart';
 part 'view/main_screen_view.dart';
 
-late final MovesenseManager movesense;
-Individual? currentIndividual;
-Caretaker? currentCaretaker;
+late final MovesenseManager activeMovesense;
+late final MovementDetector activeMovementDetector;
+late final Individual currentIndividual;
+late final Caretaker currentCaretaker;
 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  movesense = MovesenseManager(
+  activeMovesense = MovesenseManager(
     address: '2E37B870-A014-74F7-89DE-5060CF703A2F',
   );
 

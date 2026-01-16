@@ -1,15 +1,47 @@
 part of '../../main.dart';
 
-class MovementDetector {
-  MovesenseManager movesense;
-  LocationManager location;
-  Individual individual;
+class MovementDetector extends ChangeNotifier {
+  MovesenseManager movesense = activeMovesense;
+  Individual individual = currentIndividual;
 
-  MovementDetector({
-    required this.movesense,
-    required this.location,
-    required this.individual,
-  });
+  List<Movement> _movements = [];
+
+  StreamSubscription? accSub;
+
+  void start() {
+    accSub = movesense.device.imu.listen((imu) {
+      final acc = imu.accelerometer.last;
+
+      final didFall = fallAlgorithm(
+        acc.x.toDouble(),
+        acc.y.toDouble(),
+        acc.z.toDouble(),
+      );
+
+      if (didFall) {
+        _movements.add(
+          Fall(
+            Location(0, 0, 0),
+            DateTime.now(),
+            _movements.length,
+            individual,
+          ),
+        );
+        notifyListeners();
+      }
+    });
+  }
+
+  bool fallAlgorithm(double x, double y, double z) {
+    final magnitude = (x * x + y * y + z * z);
+    return magnitude > 30;
+  }
+
+  @override
+  void dispose() {
+    accSub?.cancel();
+    super.dispose();
+  }
 
   /// Return af stream of movements.
   Stream<Movement> movementDetection() {
