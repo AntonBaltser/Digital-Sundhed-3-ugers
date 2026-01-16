@@ -28,6 +28,9 @@ part 'view/loading_screen_view.dart';
 part 'view/main_screen_view.dart';
 
 late final MovesenseManager movesense;
+Individual? currentIndividual;
+Caretaker? currentCaretaker;
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

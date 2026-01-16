@@ -196,9 +196,14 @@ class IndividualInfo extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
-                    debugPrint(
-                      'Name: ${viewModel.name} \n Phone: ${viewModel.phone} \n Cpr-nr: ${viewModel.cpr} \n Diagnose: ${viewModel.diagnose}',
-                    );
+                    currentIndividual = viewModel.buildIndividual();
+
+                     debugPrint(
+                        'Name: ${currentIndividual?.name}\n'
+                        'Phone: ${currentIndividual?.phoneNumber}\n'
+                        'Cpr-nr: ${currentIndividual?.id}\n'
+                        'Diagnose: ${currentIndividual?.diagnose}',
+  );
                     debugPrint('Moving to CareTakerInfo ...');
                     Navigator.push(
                       context,
