@@ -33,8 +33,9 @@ late final Individual currentIndividual;
 late final Caretaker currentCaretaker;
 
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   activeMovesense = MovesenseManager(
     address: '2E37B870-A014-74F7-89DE-5060CF703A2F',
