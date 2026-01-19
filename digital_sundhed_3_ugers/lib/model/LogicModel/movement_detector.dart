@@ -15,6 +15,16 @@ class MovementDetector extends ChangeNotifier {
 
   bool _canDetectFall = true;
 
+  final StreamController<Movement> _movementEventController = StreamController.broadcast();
+   
+  Stream<Movement> get movementDetection => _movementEventController.stream;
+
+  void addMovement(Movement movement) {
+     _movements.add(movement);
+     _movementEventController.add(movement);
+      notifyListeners();
+  }
+
   void start() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -28,6 +38,10 @@ class MovementDetector extends ChangeNotifier {
     }
 
     notifyListeners();
+
+    // ignore: unused_local_variable
+    final MessageManager meassageManager = MessageManager(activeMovementDetector);
+    debugPrint('STATUS: Meassage Manager instance called');
 
     debugPrint('STATUS: start() blev kaldt');
 
@@ -46,7 +60,7 @@ class MovementDetector extends ChangeNotifier {
         try {
           Position position = await location.positionStream.first;
 
-          _movements.add(
+          addMovement(
             Fall(
               Location(
                 position.latitude,
@@ -57,15 +71,13 @@ class MovementDetector extends ChangeNotifier {
               individual,
             ),
           );
-          notifyListeners();
         } catch (e) {
           debugPrint('Could not get location: $e');
-          _movements.add(Fall(Location(0, 0, 0), DateTime.now(), individual));
-          notifyListeners();
+          addMovement(Fall(Location(0, 0, 0), DateTime.now(), individual));
         }
 
         _canDetectFall = false;
-        Future.delayed(const Duration(seconds: 10), () {
+        Future.delayed(const Duration(seconds: 5), () {
           _canDetectFall = true;
           debugPrint('STATUS: Fall detection ready');
         });

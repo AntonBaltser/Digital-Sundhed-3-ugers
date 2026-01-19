@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:async';
 import 'dart:math';
@@ -33,6 +34,7 @@ late final MovesenseManager activeMovesense;
 late final MovementDetector activeMovementDetector;
 late final Individual currentIndividual;
 late final Caretaker currentCaretaker;
+late final MessageManager meassageManager;
 
 
 void main() async {
