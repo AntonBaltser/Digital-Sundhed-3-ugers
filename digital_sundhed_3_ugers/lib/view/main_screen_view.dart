@@ -138,7 +138,7 @@ class _MainScreenState extends State<MainScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Accelerometer',
+                          'Times fallen',
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w600,
@@ -156,7 +156,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
 
-                        const SizedBox(height: 70),
+                        const SizedBox(height: 110),
 
                         Text(
                           'User information',
@@ -180,7 +180,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
 
-                        const SizedBox(height: 70),
+                        const SizedBox(height: 50),
 
                         // NY BOKS: Caretaker information
                         const Text(
@@ -230,8 +230,8 @@ class _MainScreenState extends State<MainScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     alignment: Alignment.center,
-                    child: const Text(
-                      'Show Data',
+                    child: Text(
+                      isExpanded ? 'Hide Data' : 'Show Data',
                       style: TextStyle(
                         color: Color.fromRGBO(0, 100, 217, 1),
                         fontSize: 33,

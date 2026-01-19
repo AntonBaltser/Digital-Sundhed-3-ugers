@@ -20,33 +20,33 @@ class Walk extends Movement {
   Walk(super.place, super.time, this.minuttes, super.individual);
 }
 
-class MovementHistory {
-  List<Movement> history = [];
-  DataManager database;
-  MovementDetector detector;
+// class MovementHistory {
+//   List<Movement> history = [];
+//   DataManager database;
+//   MovementDetector detector;
 
-  // This construtor also listens to the stream.
-  MovementHistory(this.database, this.detector) {
-    detector.movementDetection().listen((movement) {
-      addMovement(movement);
-    });
-  }
+//   // This construtor also listens to the stream.
+//   MovementHistory(this.database, this.detector) {
+//     detector.movementDetection().listen((movement) {
+//       addMovement(movement);
+//     });
+//   }
 
-  void addMovement(Movement movement) {
-    history.add(movement);
-    database.saveMovement(movement);
-  }
+//   void addMovement(Movement movement) {
+//     history.add(movement);
+//     database.saveMovement(movement);
+//   }
 
-  int get numberOfFalls => history.whereType<Fall>().length;
-  int get numberOfWalk => history.whereType<Walk>().length;
+//   int get numberOfFalls => history.whereType<Fall>().length;
+//   int get numberOfWalk => history.whereType<Walk>().length;
 
-  int get minutesWalked {
-    var sum = 0;
-    for (var movement in history) {
-      if (movement is Walk) {
-        sum += movement.minuttes;
-      }
-    }
-    return sum;
-  }
-}
+//   int get minutesWalked {
+//     var sum = 0;
+//     for (var movement in history) {
+//       if (movement is Walk) {
+//         sum += movement.minuttes;
+//       }
+//     }
+//     return sum;
+//  }
+// }

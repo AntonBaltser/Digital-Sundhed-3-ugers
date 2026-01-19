@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:async';
+import 'dart:math';
 
 part 'model/DataModel/Location.dart';
 part 'model/DataModel/movement.dart';
@@ -31,10 +34,12 @@ late final MovesenseManager activeMovesense;
 late final MovementDetector activeMovementDetector;
 late final Individual currentIndividual;
 late final Caretaker currentCaretaker;
+late final MessageManager meassageManager;
 
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   activeMovesense = MovesenseManager(
     address: '2E37B870-A014-74F7-89DE-5060CF703A2F',
@@ -56,98 +61,3 @@ class MyApp extends StatelessWidget {
       );
   }
 }
-
-// void main() async {
-//   // Lock screen rotation
-//   WidgetsFlutterBinding.ensureInitialized();
-
-//   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: MovesenseScanDebugScreen(),
-//     );
-//   }
-// }
-
-
-// class MovesenseScanDebugScreen extends StatefulWidget {
-//   const MovesenseScanDebugScreen({super.key});
-
-//   @override
-//   State<MovesenseScanDebugScreen> createState() => _MovesenseScanDebugScreenState();
-// }
-
-// class _MovesenseScanDebugScreenState extends State<MovesenseScanDebugScreen> {
-//   StreamSubscription<MovesenseDevice>? _sub;
-//   final Set<String> _seenAddresses = {}; // undgå spam i terminalen
-//   Timer? _stopTimer;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _startScan();
-//   }
-
-//   void _startScan() {
-//     debugPrint("=== STARTING MOVESE NSE SCAN ===");
-
-//     // Lyt på fundne devices
-//     _sub = Movesense().devices.listen((device) {
-//       final addr = device.address;
-//       if (addr != null && _seenAddresses.add(addr)) {
-//         debugPrint("FOUND: name='${device.name}'  address='$addr'");
-//       }
-//     }, onError: (e) {
-//       debugPrint("Scan stream error: $e");
-//     });
-
-//     // Start scan
-//     Movesense().scan();
-
-//     // Stop efter 10 sek
-//     _stopTimer?.cancel();
-//     _stopTimer = Timer(const Duration(seconds: 10), () {
-//       debugPrint("=== STOPPING SCAN (timeout) ===");
-//       Movesense().stopScan();
-//       _sub?.cancel();
-//     });
-//   }
-
-//   @override
-//   void dispose() {
-//     _stopTimer?.cancel();
-//     Movesense().stopScan();
-//     _sub?.cancel();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text("Movesense scan (debug)")),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             // Tryk for at scanne igen
-//             _seenAddresses.clear();
-//             _sub?.cancel();
-//             Movesense().stopScan();
-//             _startScan();
-//           },
-//           child: const Text("Scan igen (print i terminal)"),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
