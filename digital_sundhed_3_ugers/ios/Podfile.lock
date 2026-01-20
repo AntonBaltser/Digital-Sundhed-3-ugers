@@ -10,6 +10,8 @@ PODS:
   - Movesense (3.33.1)
   - package_info_plus (0.4.5):
     - Flutter
+  - permission_handler_apple (9.3.0):
+    - Flutter
   - SwiftProtobuf (1.33.3)
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -20,6 +22,7 @@ DEPENDENCIES:
   - mdsflutter (from `.symlinks/plugins/mdsflutter/ios`)
   - Movesense (from `https://bitbucket.org/movesense/movesense-mobile-lib.git`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -37,6 +40,8 @@ EXTERNAL SOURCES:
     :git: https://bitbucket.org/movesense/movesense-mobile-lib.git
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -51,6 +56,7 @@ SPEC CHECKSUMS:
   mdsflutter: bd3c0b3335d50947d1a192cf70f930e0fb04a766
   Movesense: dc64047c1feb856b7f7ac6ea2c67685350d99dd5
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   SwiftProtobuf: e1b437c8e31a4c5577b643249a0bb62ed4f02153
   url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
 

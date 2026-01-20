@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'package:flutter/services.dart';
+
+
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// import 'package:sembast/utils/sembast_import_export.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sembast/sembast_io.dart';
+// import 'package:sembast/sembast.dart';
+// import 'package:path/path.dart';
+
+// import 'dart:convert';
 import 'dart:async';
 import 'dart:math';
+import 'dart:io';
 
 part 'model/DataModel/Location.dart';
 part 'model/DataModel/movement.dart';
@@ -34,8 +44,8 @@ late final MovesenseManager activeMovesense;
 late final MovementDetector activeMovementDetector;
 late final Individual currentIndividual;
 late final Caretaker currentCaretaker;
-late final MessageManager meassageManager;
-
+// late final MessageManager meassageManager;
+final DataManager dataManager = DataManager(activeMovementDetector);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
