@@ -26,6 +26,8 @@ class MovementDetector extends ChangeNotifier {
   }
 
   void start() async {
+    dataManager.init();
+
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       debugPrint('Location services are disabled.');

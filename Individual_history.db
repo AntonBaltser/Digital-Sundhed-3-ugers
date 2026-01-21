@@ -1,0 +1,7 @@
+{"version":1,"sembast":1}
+{"key":1,"store":"Anton","value":{"Individual info":{"name":"Anton","CPR":"010201","Phone":"51802285","Diagnose":"demens"},"Fall info":{"Location":{"Latitude":55.784042745333785,"Longitude":12.518166133510924,"Altitude":54.62423480486018},"Time":"11:26:8"}}}
+{"key":2,"store":"Anton","value":{"Individual info":{"name":"Anton","CPR":"010201","Phone":"51802285","Diagnose":"demens"},"Fall info":{"Location":{"Latitude":55.78398043349026,"Longitude":12.518110930057949,"Altitude":0.0},"Time":"11:28:54"}}}
+{"key":3,"store":"Anton","value":{"Individual info":{"name":"Anton","CPR":"010201","Phone":"51802285","Diagnose":"demens"},"Fall info":{"Location":{"Latitude":55.78254130020182,"Longitude":12.517180954604918,"Altitude":0.0},"Time":"11:31:42"}}}
+{"key":4,"store":"Anton","value":{"Individual info":{"name":"Anton","CPR":"010201","Phone":"51802285","Diagnose":"demens"},"Fall info":{"Location":{"Latitude":55.78041669848424,"Longitude":12.516612473929795,"Altitude":51.310026824832576},"Time":"11:37:25"}}}
+{"key":5,"store":"Anton","value":{"Individual info":{"name":"Anton","CPR":"010201","Phone":"51802285","Diagnose":"demens"},"Fall info":{"Location":{"Latitude":55.78338727228592,"Longitude":12.523855634856723,"Altitude":46.225713877513925},"Time":"11:47:21"}}}
+{"key":6,"store":"Anton","value":{"Individual info":{"name":"Anton","CPR":"010201","Phone":"51802285","Diagnose":"demens"},"Fall info":{"Location":{"Latitude":55.78661558491668,"Longitude":12.525295875053901,"Altitude":42.64154779800646},"Time":"11:51:36"}}}
