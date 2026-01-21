@@ -23,9 +23,9 @@ class Fall extends Movement {
       },
       'Fall info': {
         'Location': {
-          'Latitude': place.latitude.toStringAsFixed(5),
-          'Longitude': place.longitude.toStringAsFixed(5),
-          'Altitude': place.altitude.toStringAsFixed(5),
+          'Latitude': place.latitude,
+          'Longitude': place.longitude,
+          'Altitude': place.altitude,
         },
         'Time': '${time.hour}:${time.minute}:${time.second}',
       },

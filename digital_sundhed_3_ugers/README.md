@@ -16,7 +16,6 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
-# Paste this in project.pbxproj (path: /Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Runner.xcodeproj/project.pbxproj)
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -25,6 +24,7 @@ samples, guidance on mobile development, and a full API reference.
 	objectVersion = 54;
 	objects = {
 
+# Paste this in project.pbxproj (path: /Users/antonbaltser/Desktop/Digital-Sundhed-3-ugers/digital_sundhed_3_ugers/ios/Runner.xcodeproj/project.pbxproj):
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };

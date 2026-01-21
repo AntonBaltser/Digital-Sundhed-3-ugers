@@ -1,7 +1,7 @@
 # Digital-Sundhed-3-ugers
 
 -VIGTIGT- 
-Kør 'make build' i terminalen.
+Run 'make build' in the terminal.
 
 
 

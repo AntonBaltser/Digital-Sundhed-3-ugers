@@ -1,7 +1,7 @@
 part of '../../main.dart';
 
 class DataManager {
-  static const String DB_NAME = 'Individual history';
+  static const String DB_NAME = 'Individual_history';
   MovementDetector detector;
   DataManager(this.detector); 
   Directory? dir;
